@@ -4,7 +4,7 @@
 
 ## Prerequisites
 
-Install [Node.js](https://nodejs.org) and ensure that the root folder of its installation is added to your `PATH`.
+Install [Node.js](https://nodejs.org) and ensure that the root folder of its installation is added to your `PATH`. You can check with this command: `echo %PATH%` (or `echo $PATH` on Linux / Git Bash).
 
 ## Usage
 
@@ -23,9 +23,12 @@ npm run build
 npm run lint
 ```
 
+After you run the project, you should be able to see the UI in your browser (http://localhost:8000).
+
 ## Documentation
 
 - General Vue.js documentation: https://vuejs.org/v2/guide
 - Vue CLI documentation: https://cli.vuejs.org/guide
 - Bootstrap CSS framework: https://getbootstrap.com/docs/4.6/layout/overview
 - BootstrapVue UI components: https://bootstrap-vue.org/docs/components
+

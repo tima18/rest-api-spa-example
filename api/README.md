@@ -8,8 +8,8 @@
 
 - Install a JDK in at least version 11.
 - Make sure that `JAVA_HOME` is set correctly to the root directory of your JDK. You can check with this command: `echo %JAVA_HOME%` (or `echo $JAVA_HOME` on Linux / Git Bash)
-- Make sure that the JDK `bin` folder is added to your `PATH`.
-- You can also install Maven yourself, but if you use the Maven Wrapper scripts (`mvnw` or `mvnw.cmd`), this is not necessary, since Maven will be downloaded in this case.
+- Make sure that the JDK `bin` folder is added to your `PATH`. You can check with this command: `echo %PATH%` (or `echo $PATH` on Linux / Git Bash)
+- You can also install [Maven](https://maven.apache.org/) yourself, but if you use the Maven Wrapper scripts (`mvnw` or `mvnw.cmd`), this is not necessary, since Maven will be downloaded in this case.
 
 ## Usage
 
@@ -34,6 +34,8 @@ java -jar ./target/rest-api.jar
 # --> http://localhost:8080/api/v1/cats
 ./mvnw spring-boot:run
 ```
+
+After you run the created JAR file, you should be able to see the implemented resources in your browser (http://localhost:8080/api/v1/cats).
 
 ## Documentation
 
