@@ -10,6 +10,7 @@
 - Make sure that `JAVA_HOME` is set correctly to the root directory of your JDK. You can check with this command: `echo %JAVA_HOME%` (or `echo $JAVA_HOME` on Linux / Git Bash)
 - Make sure that the JDK `bin` folder is added to your `PATH`. You can check with this command: `echo %PATH%` (or `echo $PATH` on Linux / Git Bash)
 - You can also install [Maven](https://maven.apache.org/) yourself, but if you use the Maven Wrapper scripts (`mvnw` or `mvnw.cmd`), this is not necessary, since Maven will be downloaded in this case.
+- Install and start the [MariaDB server](https://mariadb.org/download/). Update the [application file](src/main/resources/application.properties) with the database credentials if necessary
 
 ## Usage
 
