@@ -11,7 +11,10 @@ import javax.persistence.*;
 public class Cat {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private long id;
+
     @NotNull
     @Size(min = 1, max = 40)
     private String name;
@@ -23,8 +26,7 @@ public class Cat {
     public Cat() {
     }
 
-    public Cat(long id, String name, int ageInYears, String picUrl) {
-        this.id = id;
+    public Cat(String name, int ageInYears, String picUrl) {
         this.name = name;
         this.ageInYears = ageInYears;
         this.picUrl = picUrl;
