@@ -1,10 +1,8 @@
 package de.unistuttgart.iste.ese.api.cats;
 
 import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,7 +32,7 @@ public class CatController {
         Cat grumpyCat = new Cat("Grumpy Cat", 10,
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Grumpy_Cat_%2814556024763%29_%28cropped%29.jpg/220px-Grumpy_Cat_%2814556024763%29_%28cropped%29.jpg");
         catRepository.save(grumpyCat);
-        
+
     }
 
     // get all cats
@@ -52,14 +50,16 @@ public class CatController {
         if (searchedCat != null) {
             return searchedCat;
         }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Cat with ID %s not found!", id));
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                String.format("Cat with ID %s not found!", id));
     }
 
     // create a cat
     @PostMapping("/cats")
     @ResponseStatus(HttpStatus.CREATED)
     public Cat createCat(@Valid @RequestBody Cat requestBody) {
-        Cat cat = new Cat(requestBody.getName(), requestBody.getAgeInYears(), requestBody.getPicUrl());
+        Cat cat = new Cat(requestBody.getName(), requestBody.getAgeInYears(),
+                requestBody.getPicUrl());
         Cat savedCat = catRepository.save(cat);
         return savedCat;
     }
@@ -73,7 +73,8 @@ public class CatController {
             Cat savedCat = catRepository.save(requestBody);
             return savedCat;
         }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Cat with ID %s not found!", id));
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                String.format("Cat with ID %s not found!", id));
     }
 
     // delete a cat
@@ -85,6 +86,7 @@ public class CatController {
             catRepository.deleteById(id);
             return catToDelete;
         }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Cat with ID %s not found!", id));
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                String.format("Cat with ID %s not found!", id));
     }
 }
