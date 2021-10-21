@@ -1,10 +1,9 @@
 package de.unistuttgart.iste.ese.api.cats;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,44 +15,41 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-
 @RestController
-public class CatCtrl {
+public class CatController {
 
-    private AtomicLong counter;
-    private List<Cat> cats;
+    @Autowired
+    private CatRepository catRepository;
 
     // executed after start-up and dependency injection
     @PostConstruct
     public void init() {
-        this.counter = new AtomicLong();
-        this.cats = new ArrayList<>();
 
-        Cat octocat = new Cat(counter.getAndIncrement(), "Octocat", 42,
-                "https://avatars1.githubusercontent.com/u/583231");
-        this.cats.add(octocat);
+        // Adding sample data for demonstration purposes
+        Cat octocat = new Cat("Octocat", 42, "https://avatars1.githubusercontent.com/u/583231");
+        catRepository.save(octocat);
 
-        Cat grumpyCat = new Cat(counter.getAndIncrement(), "Grumpy Cat", 10,
+        Cat grumpyCat = new Cat("Grumpy Cat", 10,
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Grumpy_Cat_%2814556024763%29_%28cropped%29.jpg/220px-Grumpy_Cat_%2814556024763%29_%28cropped%29.jpg");
-        this.cats.add(grumpyCat);
+        catRepository.save(grumpyCat);
+
     }
 
     // get all cats
     @GetMapping("/cats")
     public List<Cat> getCats() {
-        return this.cats;
+        List<Cat> allCats = (List<Cat>) catRepository.findAll();
+        return allCats;
     }
 
     // get a single cat
     @GetMapping("/cats/{id}")
     public Cat getCat(@PathVariable("id") long id) {
 
-        for (Cat cat : this.cats) {
-            if (cat.getId() == id) {
-                return cat;
-            }
+        Cat searchedCat = catRepository.findById(id);
+        if (searchedCat != null) {
+            return searchedCat;
         }
-
         throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                 String.format("Cat with ID %s not found!", id));
     }
@@ -62,24 +58,21 @@ public class CatCtrl {
     @PostMapping("/cats")
     @ResponseStatus(HttpStatus.CREATED)
     public Cat createCat(@Valid @RequestBody Cat requestBody) {
-        Cat cat = new Cat(counter.getAndIncrement(), requestBody.getName(),
-                requestBody.getAgeInYears(), requestBody.getPicUrl());
-        this.cats.add(cat);
-        return cat;
+        Cat cat = new Cat(requestBody.getName(), requestBody.getAgeInYears(),
+                requestBody.getPicUrl());
+        Cat savedCat = catRepository.save(cat);
+        return savedCat;
     }
 
     // update a cat
     @PutMapping("/cats/{id}")
     public Cat updateCat(@PathVariable("id") long id, @Valid @RequestBody Cat requestBody) {
         requestBody.setId(id);
-
-        for (int x = 0; x < this.cats.size(); x++) {
-            if (this.cats.get(x).getId() == id) {
-                this.cats.set(x, requestBody);
-                return requestBody;
-            }
+        Cat catToUpdate = catRepository.findById(id);
+        if (catToUpdate != null) {
+            Cat savedCat = catRepository.save(requestBody);
+            return savedCat;
         }
-
         throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                 String.format("Cat with ID %s not found!", id));
     }
@@ -88,14 +81,11 @@ public class CatCtrl {
     @DeleteMapping("/cats/{id}")
     public Cat deleteCat(@PathVariable("id") long id) {
 
-        for (int x = 0; x < this.cats.size(); x++) {
-            if (this.cats.get(x).getId() == id) {
-                Cat deletedCat = this.cats.get(x);
-                this.cats.remove(x);
-                return deletedCat;
-            }
+        Cat catToDelete = catRepository.findById(id);
+        if (catToDelete != null) {
+            catRepository.deleteById(id);
+            return catToDelete;
         }
-
         throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                 String.format("Cat with ID %s not found!", id));
     }

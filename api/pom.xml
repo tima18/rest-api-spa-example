@@ -10,7 +10,7 @@
 
     <groupId>de.unistuttgart.iste.ese</groupId>
     <artifactId>api</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
     <name>rest-api</name>
     <description>REST API example project</description>
 
@@ -53,6 +53,18 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
