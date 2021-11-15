@@ -28,9 +28,23 @@ export default {
     },
     methods: {
         // this function is assigned to the button
-        submit: function() {
-            alert(`Hello ${this.name}! Nice to meet you!`);
+        submit: function () {
+            this.showToastMessage(
+                "Welcome!",
+                `Hello ${this.name}! Nice to meet you!`,
+                "success"
+            );
             this.name = "";
+        },
+        showToastMessage(title, msg, variant) {
+            this.$bvToast.toast(msg, {
+                title: title,
+                variant: variant,
+                solid: true,
+                toaster: "b-toaster-top-center",
+                autoHideDelay: 4000,
+                appendToast: true
+            });
         }
     }
 };

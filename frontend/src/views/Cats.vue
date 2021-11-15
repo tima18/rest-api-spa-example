@@ -45,29 +45,30 @@ export default {
     },
     methods: {
         // send GET request to API to fetch all cats
-        fetchAllCats: function() {
-            axios.get(`${config.apiBaseUrl}/cats`).then(response => {
+        fetchAllCats: function () {
+            axios.get(`${config.apiBaseUrl}/cats`).then((response) => {
                 // log response data to the browser console
                 console.log(response.data);
                 // assign response to data variable
                 this.cats = response.data;
             });
         },
-        deleteCat: function(id) {
+        deleteCat: function (id) {
             // send DELETE request to API to delete a specific cat by ID
             axios.delete(`${config.apiBaseUrl}/cats/${id}`).then(() => {
                 // update view by removing deleted cat
-                this.cats = this.cats.filter(cat => cat.id !== id);
+                this.cats = this.cats.filter((cat) => cat.id !== id);
                 // show success message using BootstrapVue toast component
                 this.showToastMessage(
+                    "Alert",
                     `Successfully deleted cat with ID ${id}!`,
                     "success"
                 );
             });
         },
-        showToastMessage(msg, variant) {
+        showToastMessage(title, msg, variant) {
             this.$bvToast.toast(msg, {
-                title: "Alert!",
+                title: title,
                 variant: variant,
                 solid: true,
                 toaster: "b-toaster-top-center",
@@ -77,7 +78,7 @@ export default {
         }
     },
     // executed after the component has been started
-    created: function() {
+    created: function () {
         this.fetchAllCats();
     }
 };
