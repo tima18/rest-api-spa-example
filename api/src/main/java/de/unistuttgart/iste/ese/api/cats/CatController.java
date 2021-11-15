@@ -25,14 +25,17 @@ public class CatController {
     @PostConstruct
     public void init() {
 
-        // Adding sample data for demonstration purposes
-        Cat octocat = new Cat("Octocat", 42, "https://avatars1.githubusercontent.com/u/583231");
-        catRepository.save(octocat);
+        // check if DB is empty
+        long numberOfCats = catRepository.count();
+        if (numberOfCats == 0) {
+            // adding sample data for demonstration purposes
+            Cat octocat = new Cat("Octocat", 42, "https://avatars1.githubusercontent.com/u/583231");
+            catRepository.save(octocat);
 
-        Cat grumpyCat = new Cat("Grumpy Cat", 10,
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Grumpy_Cat_%2814556024763%29_%28cropped%29.jpg/220px-Grumpy_Cat_%2814556024763%29_%28cropped%29.jpg");
-        catRepository.save(grumpyCat);
-
+            Cat grumpyCat = new Cat("Grumpy Cat", 10,
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Grumpy_Cat_%2814556024763%29_%28cropped%29.jpg/220px-Grumpy_Cat_%2814556024763%29_%28cropped%29.jpg");
+            catRepository.save(grumpyCat);
+        }
     }
 
     // get all cats
