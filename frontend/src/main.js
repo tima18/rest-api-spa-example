@@ -8,7 +8,15 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 import { BootstrapVue, BootstrapVueIcons } from "bootstrap-vue";
 
 // BootstrapVue for UI components and icons
-Vue.use(BootstrapVue);
+Vue.use(BootstrapVue, {
+    // global config for toast component
+    BToast: {
+        solid: true,
+        toaster: "b-toaster-top-center",
+        autoHideDelay: 4000,
+        appendToast: true
+    }
+});
 Vue.use(BootstrapVueIcons);
 
 Vue.config.productionTip = false;

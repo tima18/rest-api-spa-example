@@ -14,6 +14,8 @@
 <script>
 // import component to use it as HTML element
 import HelloWorld from "@/components/HelloWorld.vue";
+// import JS method to use in this view
+import { showToastMessage } from "../js/util";
 
 export default {
     name: "Home",
@@ -29,22 +31,13 @@ export default {
     methods: {
         // this function is assigned to the button
         submit: function () {
-            this.showToastMessage(
+            showToastMessage(
+                this,
                 "Welcome!",
                 `Hello ${this.name}! Nice to meet you!`,
                 "success"
             );
             this.name = "";
-        },
-        showToastMessage(title, msg, variant) {
-            this.$bvToast.toast(msg, {
-                title: title,
-                variant: variant,
-                solid: true,
-                toaster: "b-toaster-top-center",
-                autoHideDelay: 4000,
-                appendToast: true
-            });
         }
     }
 };

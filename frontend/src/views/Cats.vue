@@ -34,6 +34,8 @@
 import config from "@/config";
 // import library for HTTP requests
 import axios from "axios";
+// import JS method to use in this view
+import { showToastMessage } from "../js/util";
 
 export default {
     name: "Home",
@@ -59,21 +61,12 @@ export default {
                 // update view by removing deleted cat
                 this.cats = this.cats.filter((cat) => cat.id !== id);
                 // show success message using BootstrapVue toast component
-                this.showToastMessage(
+                showToastMessage(
+                    this,
                     "Alert",
                     `Successfully deleted cat with ID ${id}!`,
                     "success"
                 );
-            });
-        },
-        showToastMessage(title, msg, variant) {
-            this.$bvToast.toast(msg, {
-                title: title,
-                variant: variant,
-                solid: true,
-                toaster: "b-toaster-top-center",
-                autoHideDelay: 4000,
-                appendToast: true
             });
         }
     },
