@@ -6,7 +6,7 @@
 
 ## Prerequisites
 
-- Install a JDK in at least version 11
+- Install a JDK in at least version 17
 - Make sure that `JAVA_HOME` is set correctly to the root directory of your JDK. You can check with this command: `echo %JAVA_HOME%` (or `echo $JAVA_HOME` on Linux / Git Bash)
 - Make sure that the JDK `bin` folder is added to your `PATH`. You can check with this command: `echo %PATH%` (or `echo $PATH` on Linux / Git Bash)
 - You can also install [Maven](https://maven.apache.org/) yourself, but if you use the Maven Wrapper scripts (`mvnw` or `mvnw.cmd`), this is not necessary, since Maven will be downloaded in this case
@@ -19,7 +19,7 @@
 ./mvnw clean install
 
 # execute tests only
-./mvnw clean test
+./mvnw test
 
 # generate test coverage report (execute tests first) --> appears in target/site/jacoco/index.html
 ./mvnw jacoco:report
