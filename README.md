@@ -1,6 +1,6 @@
 # REST API and SPA Example Project
 
-> This repository contains an example of a web application based on a RESTful API with Spring Boot (`api/`) and a single page application with Vue.js (`frontend/`).
+> This repository contains an example of a web application based on a RESTful API with Spring Boot (`api/`) and a single page application with Vue.js v2 (`frontend/`).
 > Please refer to the `README.md` files in the respective folders for concrete instructions.
 
 ## Quickstart
