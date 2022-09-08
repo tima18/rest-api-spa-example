@@ -1,6 +1,6 @@
 # Vue.js Frontend
 
-> This is an example project for a single page application frontend with Vue.js. The UI is accessible under http://localhost:8000.
+> This is an example project for a single page application frontend with Vue.js v2. The UI is accessible under http://localhost:8000.
 
 ## Prerequisites
 
@@ -27,7 +27,8 @@ After you run the project, you should be able to see the UI in your browser (htt
 
 ## Documentation
 
-- General Vue.js documentation: https://vuejs.org/v2/guide
+- General Vue.js documentation: https://v2.vuejs.org/v2/guide
+- Vue Router documentation: https://v3.router.vuejs.org
 - Vue CLI documentation: https://cli.vuejs.org/guide
 - Bootstrap CSS framework: https://getbootstrap.com/docs/4.6/layout/overview
 - BootstrapVue UI components: https://bootstrap-vue.org/docs/components
