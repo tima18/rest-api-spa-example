@@ -38,7 +38,7 @@ import axios from "axios";
 import { showToastMessage } from "../js/util";
 
 export default {
-    name: "Home",
+    name: "Cats",
     data() {
         return {
             cats: [],

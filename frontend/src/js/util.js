@@ -1,5 +1,5 @@
 const showToastMessage = (vueInstance, title, msg, variant) => {
-    vueInstance.$bvToast.toast(msg, {
+    vueInstance.$root.$bvToast.toast(msg, {
         title: title,
         variant: variant
     });
