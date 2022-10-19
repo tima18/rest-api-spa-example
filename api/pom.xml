@@ -10,7 +10,7 @@
 
     <groupId>de.unistuttgart.iste.ese</groupId>
     <artifactId>api</artifactId>
-    <version>0.5.0</version>
+    <version>0.6.0</version>
     <name>rest-api</name>
     <description>REST API example project</description>
 
@@ -63,6 +63,13 @@
             <groupId>org.mariadb.jdbc</groupId>
             <artifactId>mariadb-java-client</artifactId>
             <version>3.0.8</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>2.1.214</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
