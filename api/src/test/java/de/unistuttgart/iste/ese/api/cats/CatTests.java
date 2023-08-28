@@ -1,8 +1,5 @@
 package de.unistuttgart.iste.ese.api.cats;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,6 +12,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -42,7 +42,7 @@ public class CatTests {
         BDDMockito.given(catRepository.findAll()).willReturn(allCats);
 
         // performs a get request
-        ResultActions result = this.mockMvc.perform(MockMvcRequestBuilders.get("/cats"));
+        ResultActions result = this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/cats"));
 
         // expected status code
         result.andExpect(MockMvcResultMatchers.status().isOk());
