@@ -1,12 +1,6 @@
 package de.unistuttgart.iste.ese.api.cats;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.time.LocalTime;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,6 +13,11 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.time.LocalTime;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 @SpringBootTest
 @AutoConfigureMockMvc
 public class CatControllerTests {
@@ -30,7 +29,7 @@ public class CatControllerTests {
     @DisplayName("Expect a bad request response code")
     void testCreatingNewCat_badRequest() throws Exception {
         // performs a post request without body content
-        ResultActions result = this.mockMvc.perform(MockMvcRequestBuilders.post("/cats"));
+        ResultActions result = this.mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/cats"));
 
         // asserts result
         result.andExpect(status().isBadRequest());
@@ -43,7 +42,7 @@ public class CatControllerTests {
 
         // performs a post request
         ResultActions result = this.mockMvc
-                .perform(MockMvcRequestBuilders.post("/cats").contentType(MediaType.APPLICATION_JSON)
+                .perform(MockMvcRequestBuilders.post("/api/v1/cats").contentType(MediaType.APPLICATION_JSON)
                         .content(testCatJsonString));
 
         // asserts result
@@ -59,7 +58,7 @@ public class CatControllerTests {
         long newCatId = newCat.getId();
 
         // performs a get request with the ID and asserts for returned object
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/cats/" + newCatId)).andExpect(status().isOk());
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/cats/" + newCatId)).andExpect(status().isOk());
     }
 
     @Test
@@ -67,7 +66,7 @@ public class CatControllerTests {
     void testReturningTheListOfCats_sampleData() throws Exception {
 
         // performs a get request
-        ResultActions result = this.mockMvc.perform(MockMvcRequestBuilders.get("/cats"));
+        ResultActions result = this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/cats"));
 
         // Assertions for result object:
         // expected status code
@@ -94,11 +93,11 @@ public class CatControllerTests {
                 + "\", \"ageInYears\" : 3, \"picUrl\" : \"https://avatars1.githubusercontent.com/u/583231\"}";
 
         // performs a post request
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/cats").contentType(MediaType.APPLICATION_JSON)
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/cats").contentType(MediaType.APPLICATION_JSON)
                 .content(testCatJsonString));
 
         // performs a get request
-        ResultActions result = this.mockMvc.perform(MockMvcRequestBuilders.get("/cats"));
+        ResultActions result = this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/cats"));
 
         // Assertions for result object:
         // expected status code
@@ -115,7 +114,7 @@ public class CatControllerTests {
     @DisplayName("Expect a not found as response code")
     void testGettingtCatById_notFound() throws Exception {
         // performs a get request
-        ResultActions result = this.mockMvc.perform(MockMvcRequestBuilders.get("/cats/123456789"));
+        ResultActions result = this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/cats/123456789"));
 
         // Assert result
         result.andExpect(status().isNotFound());
