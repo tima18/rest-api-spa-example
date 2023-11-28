@@ -4,7 +4,7 @@ This is an example project for a single page application frontend with Vue.js v3
 
 ## Prerequisites
 
-Install Node.js and ensure that the root folder of its installation is added to your PATH. You can check with this command: echo %PATH% (or echo $PATH on Linux / Git Bash).
+Install [Node.js](https://nodejs.org/en/) and ensure that the root folder of its installation is added to your PATH. You can check with this command: echo %PATH% (or echo $PATH on Linux / Git Bash).
 
 ## Development Setup
 
