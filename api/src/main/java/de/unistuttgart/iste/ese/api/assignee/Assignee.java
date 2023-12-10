@@ -1,68 +1,46 @@
 package de.unistuttgart.iste.ese.api.assignee;
 
-import java.util.List;
+import java.util.*;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 import de.unistuttgart.iste.ese.api.todos.ToDo;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "assignees")
-
-
+@Table(name = "assignee")
 public class Assignee {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private long id;
-
 
     @NotNull
     @Size(min = 1)
     private String prename;
 
-
     @NotNull
     @Size(min = 1)
     private String name;
-
 
     @NotNull
     @Size(min = 1)
     @Email(regexp = "[a-zA-Z0-9._%+-]+@iste.uni-stuttgart.de")
     private String email;
 
-
     @ManyToMany(mappedBy = "assigneeList", fetch = FetchType.EAGER)
     private List<ToDo> todos;
 
-    
+    public Assignee() {}
 
-
-public Assignee() {}
-
-    /**
-     * @param prename 
-     * @param name
-     * @param email
-     */
     public Assignee(final String prename, final String name, final String email) {
-        this.name = name;
         this.prename = prename;
-        this.email = email; 
+        this.name = name;
+        this.email = email;
+        this.todos = new LinkedList<>();
     }
 
-  
     public long getId() {
         return id;
     }
@@ -71,8 +49,7 @@ public Assignee() {}
         this.id = id;
     }
 
-
-     public String getPrename() {
+    public String getPrename() {
         return prename;
     }
 
@@ -80,7 +57,7 @@ public Assignee() {}
         this.prename = prename;
     }
 
-     public String getName() {
+    public String getName() {
         return name;
     }
 
@@ -96,12 +73,17 @@ public Assignee() {}
         this.email = email;
     }
 
-    public void addToDo(ToDo t2) {
+    public void addToDo(ToDo todo) {
+        this.todos.add(todo);
+        todo.getAssigneeList().add(this);
     }
 
-} 
+    public void removeToDo(ToDo todo) {
+        this.todos.remove(todo);
+        todo.getAssigneeList().remove(this);
+    }
 
-    
-
-
-    
+    public void setTodos(List<ToDo> todos) {
+        this.todos = todos;
+    }
+}
